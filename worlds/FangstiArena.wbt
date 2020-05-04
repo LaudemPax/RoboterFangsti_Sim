@@ -1,0 +1,242 @@
+#VRML_SIM R2020a utf8
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.8260419276995246 -0.504879303930941 -0.2505027387967283 5.2262148036034635
+  position 0.6182689709912347 1.5325079629977627 0.9652347710136582
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF feld_weiss Floor {
+  size 1 1
+  appearance PBRAppearance {
+    metalness 0
+  }
+}
+Solid {
+  translation -0.5 0.1 0
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.01 0.2 1
+      }
+    }
+  ]
+  boundingObject USE WALL_SHAPE
+}
+Solid {
+  translation 0.5 0.1 0
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.01 0.2 1
+      }
+    }
+  ]
+  name "solid(1)"
+  boundingObject USE WALL_SHAPE
+}
+Solid {
+  translation 1.79983e-06 0.1 0.5
+  rotation 0 1 0 1.5708
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.01 0.2 1
+      }
+    }
+  ]
+  name "solid(2)"
+  boundingObject USE WALL_SHAPE
+}
+Solid {
+  translation 1.79983e-06 0.1 -0.5
+  rotation 0 1 0 1.5708
+  children [
+    DEF WALL_SHAPE Shape {
+      appearance PBRAppearance {
+        metalness 0
+      }
+      geometry Box {
+        size 0.01 0.2 1
+      }
+    }
+  ]
+  name "solid(3)"
+  boundingObject USE WALL_SHAPE
+}
+DEF START_1 Solid {
+  translation -0.42 -0.0039 0.42
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.988235 0.913725 0.309804
+        metalness 0
+      }
+      geometry Box {
+        size 0.15 0.01 0.15
+      }
+    }
+  ]
+  name "solid(4)"
+}
+DEF START_2 Solid {
+  translation 0.43 -0.0039 -0.43
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.988235 0.913725 0.309804
+        metalness 0
+      }
+      geometry Box {
+        size 0.15 0.01 0.15
+      }
+    }
+  ]
+  name "solid(5)"
+}
+DEF border_black_1 Solid {
+  translation 0.45 -0.004 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 1
+      }
+    }
+  ]
+  name "solid(6)"
+}
+DEF border_black_2 Solid {
+  translation -0.45 -0.004 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 1
+      }
+    }
+  ]
+  name "solid(7)"
+}
+DEF border_black_3 Solid {
+  translation -0.02 -0.004 -0.45
+  rotation 0 1 0 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 1
+      }
+    }
+  ]
+  name "solid(8)"
+}
+DEF border_black_4 Solid {
+  translation -0.0199995 -0.004 0.45
+  rotation 0 1 0 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0 0 0
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 1
+      }
+    }
+  ]
+  name "solid(9)"
+}
+DEF border_gray_1 Solid {
+  translation 0.35 -0.004 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.341176 0.32549
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 0.8
+      }
+    }
+  ]
+  name "solid(10)"
+}
+DEF border_gray_2 Solid {
+  translation -0.35 -0.004 0
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.341176 0.32549
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 0.8
+      }
+    }
+  ]
+  name "solid(11)"
+}
+DEF border_gray_3 Solid {
+  translation 5.19723e-15 -0.004 0.35
+  rotation 0 1 0 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.341176 0.32549
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 0.6
+      }
+    }
+  ]
+  name "solid(12)"
+}
+DEF border_gray_4 Solid {
+  translation -7.13722e-07 -0.004 -0.35
+  rotation 0 1 0 -1.5707953071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.333333 0.341176 0.32549
+        metalness 0
+      }
+      geometry Box {
+        size 0.1 0.01 0.6
+      }
+    }
+  ]
+  name "solid(13)"
+}
+AlphaBot2 {
+  translation -0.41 0.08 0.41
+  rotation 0 1 0 2.3562
+  controller "alphabot2_test_controller"
+}
+AlphaBot2 {
+  translation 0.43 0.06 -0.42
+  rotation 0 -1 0 0.523596
+  controller "alphabot2_test_controller"
+}

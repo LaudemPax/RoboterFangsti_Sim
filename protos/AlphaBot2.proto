@@ -1,0 +1,321 @@
+PROTO AlphaBot2 [
+    field SFVec3f translation  0 0 0
+    field SFRotation rotation 0 1 0 0
+    field SFString controller "void"
+]
+{
+Robot {
+  translation IS translation
+  rotation IS rotation
+  children [
+    DEF OMNIWHEEL_FRONT HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 -0.03 0.04
+      }
+      endPoint Solid {
+        translation 0 -0.03 0.04
+        rotation 0 -0.6 0.8 0
+        children [
+          DEF OMNIWHEEL_SHAPE Shape {
+            appearance PBRAppearance {
+            }
+            geometry Sphere {
+              radius 0.01
+            }
+          }
+        ]
+        name "solid(3)"
+        boundingObject USE OMNIWHEEL_SHAPE
+        physics Physics {
+        }
+      }
+    }
+    DEF OMNIWHEEL_BACK HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0 -0.03 -0.04
+      }
+      endPoint Solid {
+        translation -2.10555e-13 -0.0299951 -0.04
+        rotation 0.9999999999999989 4.26225525739155e-08 2.0434377314485215e-08 0.0004939408730221406
+        children [
+          DEF OMNIWHEEL_SHAPE Shape {
+            appearance PBRAppearance {
+            }
+            geometry Sphere {
+              radius 0.01
+            }
+          }
+        ]
+        name "solid(2)"
+        boundingObject USE OMNIWHEEL_SHAPE
+        physics Physics {
+        }
+      }
+    }
+    DEF WHEEL_LEFT HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.05 -0.01 0
+      }
+      device [
+        RotationalMotor {
+          name "WHEEL_L"
+        }
+      ]
+      endPoint Solid {
+        translation 0.05 -0.01 0
+        rotation -1.8126726676650567e-13 -1.814242760924186e-13 -0.9999999999999999 1.5707953071795862
+        children [
+          DEF WHEEL_SHAPE Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 0
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.01
+              radius 0.03
+            }
+          }
+        ]
+        boundingObject USE WHEEL_SHAPE
+        physics DEF WHEEL_PHY Physics {
+        }
+      }
+    }
+    DEF WHEEL_RIGHT HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.05 -0.01 0
+      }
+      device [
+        RotationalMotor {
+          name "WHEEL_R"
+        }
+      ]
+      endPoint Solid {
+        translation -0.05 -0.01 0
+        rotation 6.69957221676354e-13 -6.701142306338596e-13 1 1.5707999999999998
+        children [
+          USE WHEEL_SHAPE
+        ]
+        name "solid(1)"
+        boundingObject USE WHEEL_SHAPE
+        physics USE WHEEL_PHY
+      }
+    }
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.203922 0.396078 0.643137
+        metalness 0
+      }
+      geometry DEF ALPHA_BODY Cylinder {
+        height 0.056
+        radius 0.055
+      }
+    }
+    DistanceSensor {
+      translation 0.02 -0.02 0.05
+      rotation 0 -1 0 1.04721
+      children [
+        Solid {
+          children [
+            DEF DS_SHAPE Shape {
+              appearance PBRAppearance {
+                baseColor 0.333333 0.341176 0.32549
+                metalness 0
+              }
+              geometry Box {
+                size 0.01 0.01 0.01
+              }
+            }
+          ]
+          boundingObject USE DS_SHAPE
+        }
+      ]
+      name "ir_left"
+      type "infra-red"
+    }
+    LED {
+      translation 0.01 -0.02 0.05
+      children [
+        DEF LED_SHAPE Shape {
+          appearance PBRAppearance {
+            metalness 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "led_obstacle_L"
+    }
+    DistanceSensor {
+      translation -0.02 -0.01 0.05
+      rotation 0 1 0 -2.094395307179586
+      children [
+        Solid {
+          translation 0 -0.01 0
+          rotation 0 1 0 -0.261795307179586
+          children [
+            DEF DS_SHAPE Shape {
+              appearance PBRAppearance {
+                baseColor 0.333333 0.341176 0.32549
+                metalness 0
+              }
+              geometry Box {
+                size 0.01 0.01 0.01
+              }
+            }
+          ]
+          boundingObject USE DS_SHAPE
+        }
+      ]
+      name "ir_right"
+      type "infra-red"
+    }
+    LED {
+      translation -0.01 -0.02 0.05
+      children [
+        USE LED_SHAPE
+      ]
+      name "led_obstacle_R"
+    }
+    DistanceSensor {
+      translation 0 0 0.05
+      rotation 0 1 0 -1.5707953071795862
+      children [
+        Solid {
+          translation 2.60478e-07 -7.82386e-07 0.0099988
+          rotation -0.5773529358477207 -0.5773519358478318 0.5773459358484986 -2.094375307179586
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.180392 0.203922 0.211765
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.01
+              }
+            }
+          ]
+          name "solid(1)"
+        }
+        Solid {
+          translation 1.03647e-08 -3.79119e-08 -0.01
+          rotation -0.5773509358554485 -0.5773509358554485 0.5773489358556708 -2.094395307179586
+          children [
+            Shape {
+              appearance PBRAppearance {
+                baseColor 0.180392 0.203922 0.211765
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.02
+                radius 0.01
+              }
+            }
+          ]
+        }
+      ]
+      name "ultrasonic_sensor"
+      type "sonar"
+    }
+    DEF CAM_HOLDER HingeJoint {
+      jointParameters HingeJointParameters {
+        axis 0 1 0
+        anchor 0 0.05 0
+      }
+      device [
+        RotationalMotor {
+          name "cam_servo"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.05 0
+        rotation 0 0 1 5.307156870259904e-06
+        children [
+          Camera {
+            translation 0 0.01 0.01
+            children [
+              DEF CAM_LENS Solid {
+                translation 0 4.89665e-14 0.02
+                rotation 1 0 0 1.5708
+                children [
+                  DEF CAM_LENS_SHAPE Shape {
+                    appearance PBRAppearance {
+                      baseColor 0 0 0
+                      metalness 0
+                    }
+                    geometry Cylinder {
+                      height 0.02
+                      radius 0.01
+                    }
+                  }
+                ]
+                name "solid(1)"
+                boundingObject USE CAM_LENS_SHAPE
+              }
+              DEF CAM_HEAD Solid {
+                translation 0 0 0.01
+                children [
+                  DEF CAM_SHAPE Shape {
+                    appearance PBRAppearance {
+                      metalness 0
+                    }
+                    geometry Box {
+                      size 0.04 0.03 0.02
+                    }
+                  }
+                ]
+                boundingObject USE CAM_SHAPE
+              }
+            ]
+            name "alphabot_cam"
+          }
+          DEF CAM_HOLDER_SHAPE Shape {
+            appearance PBRAppearance {
+              baseColor 0.180392 0.203922 0.211765
+              roughness 1
+              metalness 0
+            }
+            geometry Box {
+              size 0.02 0.05 0.02
+            }
+          }
+        ]
+        name "solid(4)"
+      }
+    }
+    LED {
+      translation 0 -0.03 0
+      children [
+        SpotLight {
+          attenuation 0 0 1
+          beamWidth 0.7
+          color 0 0 1
+          direction 0 -1 -1
+          on FALSE
+        }
+      ]
+      name "led_floor"
+      color [
+        0 0 1
+        1 0 0
+      ]
+    }
+    DistanceSensor {
+      translation 5.19723e-15 -0.03 0.02
+      rotation 0 0 1 -1.5707953071795862
+      children [
+        USE DS_SHAPE
+      ]
+      name "ir_line"
+      type "infra-red"
+    }
+  ]
+  name "Alphabot2"
+  boundingObject USE ALPHA_BODY
+  physics Physics {
+  }
+  controller IS controller
+}
+}
